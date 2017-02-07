@@ -4,10 +4,14 @@
             "help": "options are ETHERNET,WIFI,MESH_LOWPAN_ND,MESH_THREAD",
             "value": "MESH_LOWPAN_ND"
         },
-        "shutdown-button-enable":{
-            "help": "enable the K64F use of SWx for the deregistation/shutdown button",
-            "value": "true"
+	"mesh_radio_type": {
+                "help": "options are ATMEL, MCR20",
+                "value": "ATMEL"
         },
+	"shutdown-button-enable":{
+	    "help": "enable the K64F use of SWx for the deregistation/shutdown button",
+	    "value": "true"
+	},
         "shutdown-pin": {
             "help": "which shutdown button should be used as the deregistation/shutdown button",
             "value": "SW3"
@@ -16,11 +20,21 @@
     "macros": ["MBEDTLS_USER_CONFIG_FILE=\"mbedtls_mbed_client_config.h\""],
     "target_overrides": {
         "*": {
-            "target.features_add": ["CLIENT", "IPV6", "COMMON_PAL"],
-            "mbed-client.reconnection-count": 3,
-            "mbed-client.reconnection-interval": 5,
+            "target.features_add": ["NANOSTACK", "LOWPAN_ROUTER", "COMMON_PAL"],
             "mbed-mesh-api.6lowpan-nd-channel-page": 0,
-            "mbed-mesh-api.6lowpan-nd-channel": 12
+            "mbed-mesh-api.6lowpan-nd-channel": 12,
+            "mbed-trace.enable": 0
+        },
+        "NUCLEO_F401RE": {
+            "wifi-tx": "PA_11",
+            "wifi-rx": "PA_12"
+        },
+        "NUCLEO_F411RE": {
+            "wifi-tx": "PA_11",
+            "wifi-rx": "PA_12"
+        },
+        "UBLOX_EVK_ODIN_W2": {
+        "target.device_has_remove": ["EMAC"]
         }
     }
 }
